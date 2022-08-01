@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { stringify } from 'querystring';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { devicesDocument } from './devices.schema';
 import { DevicesService } from './devices.service';
 
@@ -21,6 +22,7 @@ export class DevicesController {
         return this.DevService.findAllDevices();
     }
 
+    @UseGuards(JwtGuard)
     @Get(':id')
     findOneByID(@Param('id') id : string): Promise<devicesDocument> {
         return this.DevService.findOneDevice(id);
