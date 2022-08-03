@@ -20,7 +20,7 @@ export class AuthService {
         // const userDetails = this.userService._getUserDetails(user);
         const {first_name, last_name, email, password} = user;
         const existingUSer  =  await this.userService.findByEmail(email);
-        if(existingUSer) return 'Email taken';
+        if(existingUSer) return 'Email already taken';
         // Register user 
         const hashedPassword = await this.hashPassword(password);
         const newUser = await this.userService.createUser(first_name, last_name, email, hashedPassword);
@@ -46,6 +46,7 @@ export class AuthService {
         const {email, password} = existingUSer;
         const user = await this.validateUSer(email, password);
         if(!user) return null;
+        console.log(user)
         const jwtToken = await this.jtwService.signAsync({user});
         return {token: jwtToken};
 

@@ -1,6 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { stringify } from 'querystring';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { RolesEnum } from 'src/auth/models/role.enum';
 import { devicesDocument } from './devices.schema';
 import { DevicesService } from './devices.service';
 
@@ -22,7 +25,8 @@ export class DevicesController {
         return this.DevService.findAllDevices();
     }
 
-    @UseGuards(JwtGuard)
+    @Roles(RolesEnum.ADMIN, RolesEnum.USER, RolesEnum.PREMIUM)
+    @UseGuards(JwtGuard, RolesGuard)
     @Get(':id')
     findOneByID(@Param('id') id : string): Promise<devicesDocument> {
         return this.DevService.findOneDevice(id);
