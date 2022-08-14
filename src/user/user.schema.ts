@@ -15,8 +15,12 @@ export class User {
     email: string;
     @Prop({required: true})
     password: string;
-    @Prop({ dafault: 'user'})
+    @Prop({default: 'user'})
     roles: string[];
+    // @Prop()
+    // devices: string[];
+    // @Prop()
+    // experiments: string[];
 
 }
 

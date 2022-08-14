@@ -25,7 +25,7 @@ export class DevicesController {
         return this.DevService.findAllDevices();
     }
 
-    @Roles(RolesEnum.ADMIN, RolesEnum.USER, RolesEnum.PREMIUM)
+    @Roles(RolesEnum.ADMIN, RolesEnum.PREMIUM)
     @UseGuards(JwtGuard, RolesGuard)
     @Get(':id')
     findOneByID(@Param('id') id : string): Promise<devicesDocument> {

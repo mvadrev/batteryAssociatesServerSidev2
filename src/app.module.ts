@@ -13,3 +13,5 @@ import { ConfigModule } from '@nestjs/config';
   providers: [AppService, ],
 })
 export class AppModule {}
+// mongodb+srv://mvadrev:<password>@cluster0.ooqsc.mongodb.net/?retryWrites=true&w=majority
+// 'mongodb://localhost:27017/Mukund'
